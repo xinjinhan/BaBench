@@ -74,6 +74,5 @@ fabric.properties
 /core/target/
 /core/src/main/resources/
 /.idea/
-/tools/
 /TPCDSTest.iml
 /core/src/main/scala/META-INF/
