@@ -48,7 +48,8 @@ object GenerateTpchData {
       sqlContext.sql(s"create database $databaseName")
       tables.createExternalTables(rootDir, format, databaseName, overwrite = true, discoverPartitions = false)
     } catch {
-      case e: Exception => e.printStackTrace()
+      case e: Exception =>
+        e.printStackTrace()
     }
   }
 }

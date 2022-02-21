@@ -1,5 +1,4 @@
 /core/target/
-/core/src/main/resources/
 /.idea/
 /TPCDSTest.iml
 /core/src/main/scala/META-INF/

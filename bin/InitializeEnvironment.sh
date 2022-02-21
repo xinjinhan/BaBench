@@ -1,5 +1,9 @@
 #!/bin/bash
 
+# start hadoop
+start-dfs.sh
+start-yarn.sh
+
 location=$(cd "$(dirname "$0")";pwd)
 
 if [ ! -f "$location/conf/slaves" ];then
