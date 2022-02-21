@@ -6,8 +6,8 @@ start-yarn.sh
 
 location=$(cd "$(dirname "$0")";pwd)
 
-if [ ! -f "$location/conf/slaves" ];then
-  echo "Initializing failed. Please specify slaves of your cluster in $location/conf/slaves"
+if [ ! -f "$location/../conf/slaves" ];then
+  echo "Initializing failed. Please specify slaves of your cluster in $location/../conf/slaves"
   exit 1
 fi
 

@@ -219,5 +219,6 @@
     <orderEntry type="library" name="Maven: org.scala-lang.modules:scala-collection-compat_2.12:2.1.2" level="project" />
     <orderEntry type="library" name="Maven: com.github.scopt:scopt_2.12:4.0.1" level="project" />
     <orderEntry type="library" name="Maven: org.yaml:snakeyaml:1.29" level="project" />
+    <orderEntry type="library" name="scala-sdk-2.12.10" level="application" />
   </component>
 </module>
