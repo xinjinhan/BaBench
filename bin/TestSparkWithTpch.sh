@@ -1,3 +1,13 @@
 #!/bin/bash
 location=$(cd "$(dirname "$0")";pwd)
-spark-submit --class org.BernardX.benchmark.Tpch.RunTpch ${location}/../jars/SparkBenchmarkSuite.jar 50 Q1 ${location}/../../Reports
+
+#spark-submit --class <class> <JAR_PATH>
+spark-submit --class org.shuhai.spark.sql.perf.tpch.RunTpch ${location}/Benchmarks/jars/SparkBenchmarkSuite.jar \
+  # <DATA_SCALE>
+  500 \
+  # <QUERY_LIST>
+  q1,q2,q3 \
+  # <REPORT_LOCATION>
+  ${location}/Reports \
+  # <HADOOP_HOST>
+  $HOSTNAME
