@@ -3,7 +3,7 @@
 * Contents:
     1. Overview
     2. Getting Started
-    3. To do list
+    3. To Do List
     
 ---
 ## OVERVIEW ##
