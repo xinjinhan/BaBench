@@ -4,12 +4,12 @@
     <output url="file://$MODULE_DIR$/target/scala-2.12/classes" />
     <output-test url="file://$MODULE_DIR$/target/test-classes" />
     <content url="file://$MODULE_DIR$">
+      <sourceFolder url="file://$MODULE_DIR$/src/main/resources" type="java-resource" />
       <sourceFolder url="file://$MODULE_DIR$/src/main/scala" isTestSource="false" />
       <excludeFolder url="file://$MODULE_DIR$/target" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="library" name="scala-sdk-2.12.10" level="application" />
     <orderEntry type="library" scope="TEST" name="Maven: org.scalatest:scalatest_2.12:3.2.9" level="project" />
     <orderEntry type="library" name="Maven: org.scala-lang:scala-library:2.12.13" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: org.scalatest:scalatest-core_2.12:3.2.9" level="project" />
