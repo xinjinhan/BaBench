@@ -30,9 +30,9 @@ object RunTpch {
         .sqlContext
 
       val tpch = new TPCH(sqlContext)
-      val databaseName = s"tpcds_${scaleFactor}_parquet"
+      val databaseName = s"tpch_${scaleFactor}_parquet"
 
-      val resultLocation = s"hdfs://$hadoopHost:9000/BenchmarkData/Tpcds/Results"
+      val resultLocation = s"hdfs://$hadoopHost:9000/BenchmarkData/Tpch/Results"
       val iteration = 1
       val queryMap = tpch.queriesMap
       val timeout = 100000
@@ -48,10 +48,10 @@ object RunTpch {
       val stopTime = dateFrame.format(new Date())
 
       val results = experiment.getFinalResults()
-//      val times = results.map(res => res.executionTime.get.toInt).toList
-//      val duration = times.sum
-//      reportDurationFile.write(s"TPC-H  ($queryListString)  ${times.mkString("(",",",")")}  $startTime" +
-//        s"  $stopTime  $duration  ${scaleFactor}GB  Succeed\n")
+      val times = results.map(res => res.executionTime.get.toInt).toList
+      val duration = times.sum
+      reportDurationFile.write(s"TPC-H  ($queryListString)  ${times.mkString("(",",",")")}  $startTime" +
+        s"  $stopTime  $duration  ${scaleFactor}GB  Succeed\n")
     }
     catch {
       case e: Exception =>
