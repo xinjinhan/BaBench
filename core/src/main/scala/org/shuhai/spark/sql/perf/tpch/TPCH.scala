@@ -35,14 +35,9 @@ class DBGEN(dbgenDir: String, params: Seq[String]) extends DataGenerator {
           "partsupp" -> "S"
         )
         val paramsString = params.mkString(" ")
-        val commands = if (numPartitions > 1)
-          Seq(
-            "bash", "-c",
-            s"cd $localToolsDir && ./dbgen -q $paramsString -T ${shortTableNames(name)} -s $scaleFactor $parallel && cat $dbgenDir/$name.tbl.$i && rm $dbgenDir/$name.tbl.$i")
-        else
-          Seq(
-            "bash", "-c",
-            s"cd $localToolsDir && ./dbgen -q $paramsString -T ${shortTableNames(name)} -s $scaleFactor $parallel && cat $dbgenDir/$name.tbl && rm $dbgenDir/$name.tbl")
+        val commands = Seq(
+          "bash", "-c",
+          s"cd $localToolsDir && ./dbgen -q $paramsString -T ${shortTableNames(name)} -s $scaleFactor $parallel")
         println(commands)
         BlockingLineStream(commands)
       }.repartition(numPartitions)
