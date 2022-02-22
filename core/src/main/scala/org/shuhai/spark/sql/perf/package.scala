@@ -1,4 +1,4 @@
-package org.shuhai.spark.sql
+package org.BernardX.spark.sql
 
 import org.apache.spark.sql.functions._
 

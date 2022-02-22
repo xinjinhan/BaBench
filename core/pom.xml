@@ -5,7 +5,7 @@
 
     <parent>
         <artifactId>parent_2.12</artifactId>
-        <groupId>org.shuhai</groupId>
+        <groupId>org.BernardX</groupId>
         <version>1.0</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
@@ -22,14 +22,14 @@
         <hadoop.deps.scope>provided</hadoop.deps.scope>
         <hive.deps.scope>provided</hive.deps.scope>
         <parquet.deps.scope>provided</parquet.deps.scope>
-        <spark.version>3.0.3</spark.version>
+        <spark.version>2.4.5</spark.version>
         <java.version>1.8</java.version>
         <sparkPerf.version>0.3.2</sparkPerf.version>
         <twitter-util-jvm.version>21.2.0</twitter-util-jvm.version>
         <scopt.version>4.0.1</scopt.version>
         <yaml.version>1.29</yaml.version>
-        <scala.version>2.12.10</scala.version>
-        <scala-binary.version>2.12</scala-binary.version>
+        <scala.version>2.11.18</scala.version>
+        <scala-binary.version>2.11</scala-binary.version>
     </properties>
 
     <dependencies>

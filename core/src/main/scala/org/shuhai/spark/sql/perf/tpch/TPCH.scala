@@ -1,9 +1,9 @@
-package org.shuhai.spark.sql.perf.tpch
+package org.BernardX.spark.sql.perf.tpch
 
 import scala.sys.process._
 
-import org.shuhai.spark.sql.perf.{Benchmark, BlockingLineStream, DataGenerator, Table, Tables}
-import org.shuhai.spark.sql.perf.ExecutionMode.CollectResults
+import org.BernardX.spark.sql.perf.{Benchmark, BlockingLineStream, DataGenerator, Table, Tables}
+import org.BernardX.spark.sql.perf.ExecutionMode.CollectResults
 import org.apache.commons.io.IOUtils
 
 import org.apache.spark.SparkContext

@@ -1,4 +1,4 @@
-package org.shuhai.spark.sql.perf
+package org.BernardX.spark.sql.perf
 
 /**
  * Describes how a given Spark benchmark should be run (i.e. should the results be collected to

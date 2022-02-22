@@ -1,4 +1,4 @@
-package org.shuhai.spark.sql.perf.tpch
+package org.BernardX.spark.sql.perf.tpch
 
 import org.apache.spark.sql.SparkSession
 
