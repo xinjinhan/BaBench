@@ -48,10 +48,10 @@ object RunTpch {
       val stopTime = dateFrame.format(new Date())
 
       val results = experiment.getFinalResults()
-      val times = results.map(res => res.executionTime.get.toInt).toList
-      val duration = times.sum
-      reportDurationFile.write(s"TPC-H  ($queryListString)  ${times.mkString("(",",",")")}  $startTime" +
-        s"  $stopTime  $duration  ${scaleFactor}GB  Succeed\n")
+//      val times = results.map(res => res.executionTime.get.toInt).toList
+//      val duration = times.sum
+//      reportDurationFile.write(s"TPC-H  ($queryListString)  ${times.mkString("(",",",")")}  $startTime" +
+//        s"  $stopTime  $duration  ${scaleFactor}GB  Succeed\n")
     }
     catch {
       case e: Exception =>
