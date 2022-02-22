@@ -13,7 +13,13 @@ BigBench is a big data benchmark suite that helps evaluate different big data fr
 
 ---
 ## Test with Spark SQL ##
-
+Before your test, make sure you have deployed hadoop and spark environment, checking with commmands:
+```
+hadoop -version
+```
+```
+spark-shell --version
+```
 ### 1.specify slaves of your cluster
 * Copy "[slaves.template](conf/slaves.template)" to "slaves" in folder [conf](conf).
 * Specify the hostname/ip of every node, one hostname/ip per line. Such as:

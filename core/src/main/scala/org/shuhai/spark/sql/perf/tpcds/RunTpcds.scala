@@ -51,7 +51,7 @@ object RunTpcds {
       val results = experiment.getFinalResults()
       val times = results.map(res => res.executionTime.get.toInt).toList
       val duration = times.sum
-      reportDurationFile.write(s"TPC-DS  ($queryListString)  $times  $startTime" +
+      reportDurationFile.write(s"TPC-DS  ($queryListString)  ${times.mkString("(",",",")")}  $startTime" +
         s"  $stopTime  $duration  ${scaleFactor}GB  Succeed\n")
     }
     catch {
