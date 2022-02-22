@@ -50,6 +50,7 @@
 #include "permute.h"
 #include "scd.h"
 #include "parallel.h"
+#include "params.h"
 #ifdef JMS
 extern rng_t Streams[];
 #endif
@@ -138,15 +139,17 @@ tdef *pT = getSimpleTdefsByNumber(STORE_SALES);
 	/** 
 	* having gone to the trouble to make the sale, now let's see if it gets returned
 	*/
-	genrand_integer(&nTemp, DIST_UNIFORM, 0, 99, 0, SR_IS_RETURNED);
-	if (nTemp < SR_RETURN_PCT)
-	{
-		mk_w_store_returns(&ReturnRow, 1);
-      if (bPrint)
-         pr_w_store_returns(&ReturnRow);
-	}
+	if (!is_set_filter() || is_set_child()) {
+		genrand_integer(&nTemp, DIST_UNIFORM, 0, 99, 0, SR_IS_RETURNED);
+		if (nTemp < SR_RETURN_PCT)
+		{
+			mk_w_store_returns(&ReturnRow, 1);
+			if (bPrint)
+				pr_w_store_returns(&ReturnRow);
+		}
+        }
 
-   if (bPrint)
+   if (bPrint && (!is_set_filter() || !is_set_child()))
       pr_w_store_sales(NULL);
 	
 	return;

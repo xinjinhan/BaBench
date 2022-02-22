@@ -69,13 +69,13 @@
              select ws_bill_customer_sk as customer_sk, d_year,d_moy
              from web_sales, date_dim where ws_sold_date_sk = d_date_sk
               and d_year = [YEAR] and
-                   d_moy between [MONTH] and [MONTH]+3
+                  d_moy between [MONTH] and [MONTH]+3
              union all
              select cs_ship_customer_sk as customer_sk, d_year, d_moy
              from catalog_sales, date_dim where cs_sold_date_sk = d_date_sk
               and d_year = [YEAR] and
-                   d_moy between [MONTH] and [MONTH]+3
-            ) x
+                  d_moy between [MONTH] and [MONTH]+3
+	     ) x
             where c.c_customer_sk = customer_sk)
  group by cd_gender,
           cd_marital_status,
@@ -94,3 +94,4 @@
           cd_dep_employed_count,
           cd_dep_college_count
 [_LIMITC];
+

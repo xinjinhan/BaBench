@@ -19,5 +19,5 @@ for node in $(cat $location/../conf/slaves)
 # copy benchmark tools to every node
 do
   ssh $node "mkdir -p $location/.."
-  scp -r $location/../tools $node:$location
+  scp -r $location/../tools $node:$location/..
 done

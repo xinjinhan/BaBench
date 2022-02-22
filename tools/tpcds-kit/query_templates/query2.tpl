@@ -33,6 +33,7 @@
 -- Contributors:
 -- 
  define YEAR=random(1998,2001,uniform);
+ 
   
  with wscs as
  (select sold_date_sk
