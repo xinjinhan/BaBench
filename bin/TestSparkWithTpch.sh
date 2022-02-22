@@ -6,20 +6,16 @@ selectedQueries=q1,q2,q3
 
 
 # submit benchmark program
-if hadoop fs -test -e /BenchmarkData/Tpch/tpch_${datascale}_parquet/region;then
+if hadoop fs -test -e /BenchmarkData/Tpch/tpch_${datascale}/region;then
 location=$(cd "$(dirname "$0")";pwd)
-# spark-submit --class <class> <JAR_PATH>
+# spark-submit --class <class> <JAR_PATH> <DATA_SCALE> <QUERY_LIST> <REPORT_LOCATION> <HADOOP_HOST>
 spark-submit --class org.shuhai.spark.sql.perf.tpch.RunTpch ${location}/../jars/BenchmarkSuites.jar \
-# <DATA_SCALE>
 $dataScale \
-# <QUERY_LIST>
 $selectedQueries \
-# <REPORT_LOCATION>
-${location}/Reports \
-# <HADOOP_HOST>
+${location}/../Reports \
 $HOSTNAME
 
 else
-   echo "${dataScale}GB Tpch data does not exist in HDFS of has broken. Please re-generate it before testing."
+   echo "${dataScale}GB Tpch data does not exist in HDFS or has broken. Please re-generate it before testing."
    exit 1
 fi
