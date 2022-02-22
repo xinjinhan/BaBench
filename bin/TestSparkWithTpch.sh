@@ -15,7 +15,7 @@ $selectedQueries \
 ${location}/../reports \
 $HOSTNAME
 
-elsetott
+else
    echo "${dataScale}GB Tpch data does not exist in HDFS or has broken. Please re-generate it before testing."
    exit 1
 fi
