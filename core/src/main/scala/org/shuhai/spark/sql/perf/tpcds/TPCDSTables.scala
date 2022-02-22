@@ -1,9 +1,9 @@
-package org.shuhai.spark.sql.perf.tpcds
+package org.BernardX.spark.sql.perf.tpcds
 
 import scala.sys.process._
 
-import org.shuhai.spark.sql.perf
-import org.shuhai.spark.sql.perf.{BlockingLineStream, DataGenerator, Table, Tables}
+import org.BernardX.spark.sql.perf
+import org.BernardX.spark.sql.perf.{BlockingLineStream, DataGenerator, Table, Tables}
 
 import org.apache.spark.SparkContext
 import org.apache.spark.sql.SQLContext

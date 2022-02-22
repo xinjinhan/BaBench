@@ -1,7 +1,7 @@
-package org.shuhai.spark.sql.perf.tpcds
+package org.BernardX.spark.sql.perf.tpcds
 
 import scala.collection.mutable
-import org.shuhai.spark.sql.perf._
+import org.BernardX.spark.sql.perf._
 import org.apache.spark.SparkContext
 import org.apache.spark.sql.{SQLContext, SparkSession}
 

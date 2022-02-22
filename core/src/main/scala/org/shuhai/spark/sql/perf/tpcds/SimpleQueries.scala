@@ -1,6 +1,6 @@
-package org.shuhai.spark.sql.perf.tpcds
+package org.BernardX.spark.sql.perf.tpcds
 
-import org.shuhai.spark.sql.perf.{ExecutionMode, Benchmark}
+import org.BernardX.spark.sql.perf.{ExecutionMode, Benchmark}
 
 trait SimpleQueries extends Benchmark {
 

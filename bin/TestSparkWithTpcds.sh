@@ -9,7 +9,7 @@ selectedQueries=q1,q2,q3
 if hadoop fs -test -e /BenchmarkData/Tpcds/tpcds_${dataScale}/web_site;then
 location=$(cd "$(dirname "$0")";pwd)
 # spark-submit --class <class> <JAR_PATH> <DATA_SCALE> <QUERY_LIST> <REPORT_LOCATION> <HADOOP_HOST>
-spark-submit --master yarn --class org.shuhai.spark.sql.perf.tpcds.RunTpcds ${location}/../jars/BenchmarkSuites.jar \
+spark-submit --master yarn --class org.BernardX.spark.sql.perf.tpcds.RunTpcds ${location}/../jars/BenchmarkSuites.jar \
 $dataScale \
 $selectedQueries \
 ${location}/../reports \

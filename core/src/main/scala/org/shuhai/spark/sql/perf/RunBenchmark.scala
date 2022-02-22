@@ -1,4 +1,4 @@
-package org.shuhai.spark.sql.perf
+package org.BernardX.spark.sql.perf
 
 import java.net.InetAddress
 import java.io.File
@@ -67,7 +67,7 @@ object RunBenchmark {
           .newInstance()
           .asInstanceOf[Benchmark]
     } getOrElse {
-      Class.forName("org.shuhai.spark.sql.perf." + config.benchmarkName)
+      Class.forName("org.BernardX.spark.sql.perf." + config.benchmarkName)
           .newInstance()
           .asInstanceOf[Benchmark]
     }

@@ -1,4 +1,4 @@
-package org.shuhai.spark.sql.perf
+package org.BernardX.spark.sql.perf
 
 import org.apache.spark.sql.functions._
 import org.apache.spark.sql.types._

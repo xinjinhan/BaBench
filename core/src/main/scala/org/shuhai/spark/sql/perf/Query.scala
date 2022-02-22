@@ -1,4 +1,4 @@
-package org.shuhai.spark.sql.perf
+package org.BernardX.spark.sql.perf
 
 import scala.collection.mutable
 import scala.collection.mutable.ArrayBuffer
@@ -86,7 +86,7 @@ class Query(
 
             BreakdownResult(
               node.nodeName,
-              node.simpleString(maxFields).replaceAll("#\\d+", ""),
+              node.simpleString(maxFields).toString.replaceAll("#\\d+", ""),
               index,
               childIndexes,
               executionTime,

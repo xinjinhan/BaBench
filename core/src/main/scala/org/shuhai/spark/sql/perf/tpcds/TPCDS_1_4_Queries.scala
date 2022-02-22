@@ -1,6 +1,6 @@
-package org.shuhai.spark.sql.perf.tpcds
+package org.BernardX.spark.sql.perf.tpcds
 
-import org.shuhai.spark.sql.perf.{Benchmark, ExecutionMode, Query}
+import org.BernardX.spark.sql.perf.{Benchmark, ExecutionMode, Query}
 
 /**
  * This implements the official TPCDS v1.4 queries with only cosmetic modifications

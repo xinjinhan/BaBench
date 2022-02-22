@@ -1,4 +1,4 @@
-package org.shuhai.spark.sql.perf
+package org.BernardX.spark.sql.perf
 
 /**
  * The performance results of all given queries for a single iteration.
