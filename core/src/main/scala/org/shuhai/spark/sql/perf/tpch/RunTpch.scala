@@ -14,7 +14,6 @@ object RunTpch {
       )
       System.exit(1)
     }
-    try {
       val scaleFactor: String = args(0)
       val queryListString: String = args(1)
       val queryNames: Array[String] = queryListString.split(",")
@@ -23,7 +22,7 @@ object RunTpch {
       val reportDurationFile = new FileWriter(s"${File.separator}$reportLocation${File.separator}bigbench.report",true)
       val dateFrame: SimpleDateFormat = new SimpleDateFormat("yyyy-MM-dd_HH:mm:ss")
 
-
+    try {
       val sqlContext = SparkSession
         .builder()
         .enableHiveSupport()
@@ -57,6 +56,9 @@ object RunTpch {
     catch {
       case e: Exception =>
         e.printStackTrace()
+    }
+    finally {
+      reportDurationFile.close()
     }
   }
 }
