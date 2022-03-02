@@ -36,7 +36,7 @@ slabe3
 ### 1) Genenrate TPC-DS Data
 * Specify the configuration in [bin/GenerateTpcdsData.sh](bin/GenerateTpcdsData.sh):
   
-  ***datascale*** ( decides the data scale of generated data )
+  ***datascale*** ( decides the data scale of generated data, in GB )
   
   ***onlyInitializeMetastore*** ( ***usually keep it False***, decides whether to skip the data generating and create tables directly )
 ```
@@ -51,7 +51,7 @@ onlyInitializeMetastore=False
 ### 2) Run TPC-DS Benchmark
 * Specify the configuration in [bin/TestSparkWithTpcds.sh](bin/TestSparkWithTpcds.sh):
   
-  ***datascale*** ( decides the data scale of TPC-DS benchmark )
+  ***datascale*** ( decides the data scale of TPC-DS benchmark, in GB )
   
   ***selectedQueries*** ( decides which queries of TPC-DS to be tested )
 ```
@@ -67,7 +67,7 @@ selectedQueries=q1,q2,q3
 ### 1) Genenrate TPC-H Data
 * Specify the configuration in [bin/GenerateTpchData.sh](bin/GenerateTpcdsData.sh):
 
-  ***datascale*** ( decides the data scale of generated data )
+  ***datascale*** ( decides the data scale of generated data, in GB )
 
   ***onlyInitializeMetastore*** ( ***usually keep it False***, decides whether to skip the data generating and create tables directly )
 ```
@@ -82,7 +82,7 @@ onlyInitializeMetastore=False
 ### 2) Run TPC-H Benchmark
 * Specify the configuration in [bin/TestSparkWithTpch.sh](bin/TestSparkWithTpch.sh):
   
-  ***datascale*** ( decides the data scale of TPC-DS benchmark )
+  ***datascale*** ( decides the data scale of TPC-DS benchmark， in GB )
 
   ***selectedQueries*** ( decides which queries of TPC-DS to be tested )
 ```
