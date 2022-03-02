@@ -19,8 +19,9 @@ hadoop version
 ```
 ```
 spark-shell --version
-（***spark2x with scala2.11.x please pull branch spark2x_scala211***）
 ```
+***spark2x with scala2.11.x please pull branch spark2x_scala211***
+
 ### 1.specify slaves of your cluster
 * Copy "[slaves.template](conf/slaves.template)" to "slaves" in folder [conf](conf).
 * Specify the hostname/ip of every node, one hostname/ip per line. Such as:
