@@ -13,9 +13,9 @@ BigBench is a big data benchmark suite that helps evaluate different big data fr
 
 ---
 ## Test with Spark SQL ##
-Before your test, make sure you have deployed hadoop and spark environment, checking with commmands:
+Before your test, make sure you have deployed hadoop and spark environment, checking with commands:
 ```
-hadoop -version
+hadoop version
 ```
 ```
 spark-shell --version
@@ -49,7 +49,7 @@ onlyInitializeMetastore=False
 
 * Execute the [bin/GenerateTpcdsData.sh](bin/GenerateTpcdsData.sh) in the master node.
 ### 2) Run TPC-DS Benchmark
-* Specify the configuration in [bin/GenerateTpcdsData.sh](bin/GenerateTpcdsData.sh):
+* Specify the configuration in [bin/TestSparkWithTpcds.sh](bin/TestSparkWithTpcds.sh):
   
   ***datascale*** ( decides the data scale of TPC-DS benchmark )
   
@@ -80,7 +80,7 @@ onlyInitializeMetastore=False
 
 * Execute the [bin/GenerateTpchData.sh](bin/GenerateTpcdsData.sh) in the master node.
 ### 2) Run TPC-H Benchmark
-* Specify the configuration in [bin/GenerateTpchData.sh](bin/GenerateTpcdsData.sh):
+* Specify the configuration in [bin/TestSparkWithTpch.sh](bin/TestSparkWithTpch.sh):
   
   ***datascale*** ( decides the data scale of TPC-DS benchmark )
 
