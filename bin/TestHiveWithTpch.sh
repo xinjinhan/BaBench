@@ -14,20 +14,18 @@ durations=()
 durationSum=0
 
 function runHive() {
-  hive -i $location/../querySamples/tpch/init.sql --database tpch_parquet_$1 -e $location/../querySamples/tpch/$2}
+  hive -i $location/../querySamples/tpch/init.sql --database tpch_$1_parquet -f $location/../querySamples/tpch/$2
 }
 startTime=`date +'%Y-%m-%d_%H:%M:%S'`
 
 for i in "${!querys[@]}";do
-    startTimeQuery=`date +'%Y-%m-%d_%H:%M:%S'`
-    startSecondsQuery=$(date --date="$startTimeQuery" +%s)
-    runHive $dataScale ${querys[$i]}
+    startSecondsQuery=$(date +%s)
+    runHive $dataScale ${querys[$i]}.sql
     if [ "$?" -ne 0 ];then
-      echo "Hive: ${dataScale}GB Tpch test failed at Query ${querys[$i]}."
+      echo "Falied: Hive ${dataScale}GB Tpch test failed at Query ${querys[$i]}."
       exit 1
     fi
-    endTimeQuery=`date +'%Y-%m-%d_%H:%M:%S'`
-    endSecondsQuery=$(date --date="$endTimeQuery" +%s)
+    endSecondsQuery=$(date +%s)
     durations[$i]=$((startSecondsQuery-endSecondsQuery))
     durationSum=$((durationSum+durations[$i]))
 done

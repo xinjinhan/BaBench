@@ -14,16 +14,16 @@ durations=()
 durationSum=0
 
 function runHive() {
-  hive -i $location/../querySamples/tpcds/init.sql --database tpcds_parquet_$1 -e $location/../querySamples/tpcds/$2}
+  hive -i $location/../querySamples/tpcds/init.sql --database tpcds_$1_parquet -f $location/../querySamples/tpcds/$2
 }
 startTime=`date +'%Y-%m-%d_%H:%M:%S'`
 
 for i in "${!querys[@]}";do
     startTimeQuery=`date +'%Y-%m-%d_%H:%M:%S'`
     startSecondsQuery=$(date --date="$startTimeQuery" +%s)
-    runHive $dataScale ${querys[$i]}
+    runHive $dataScale ${querys[$i]}.sql
     if [ "$?" -ne 0 ];then
-      echo "Hive: ${dataScale}GB Tpcds test failed at Query ${querys[$i]}."
+      echo "Falied: Hive ${dataScale}GB Tpcds test failed at Query ${querys[$i]}."
       exit 1
     fi
     endTimeQuery=`date +'%Y-%m-%d_%H:%M:%S'`
