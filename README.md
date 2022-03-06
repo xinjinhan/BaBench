@@ -1,18 +1,25 @@
 # Bigdata Benchmark suite (BigBench)
-## A scalable, easy to use, and user-friendly benchmark suite.
+## A scalable, easy to use OLAP benchmark suite for.
 * Homepage: https://github.com/xinjinhan/BigBench.git
 * Contents:
-    1. Overview
-    2. Getting Started
-    3. To Do List
-    
+    1. Overview 
+    2. Build Bigbench
+    3. Getting Started
+       1) Configuration
+       2) Initialize the Environment
+       3) Prepare Benchmark Data
+       4) Run benchmark
 ---
 ## OVERVIEW ##
 
-BigBench is a big data benchmark suite that helps evaluate different big data framework ( such as [Spark SQL](https://github.com/apache/spark), [Hive](https://github.com/apache/hive), [Impala](https://github.com/apache/impala), and etc ). By now, BigBench contains TPC-DS and TPC-H, two commonly used decision support system benchmarks. BigBench can be easily used to benchmark Spark. BigBench will support more benchmarks in the future. BigBench will also support cloud-native systems and service monitoring system ( such as [prometheus](https://github.com/prometheus/prometheus) ) later.  
+BigBench is a big data benchmark suite that helps evaluate different big data framework ( such as [Spark SQL](https://github.com/apache/spark), [Hive](https://github.com/apache/hive), [Impala](https://github.com/apache/impala), and etc ). By now, BigBench contains TPC-DS and TPC-H, two commonly used decision support system benchmarks. BigBench can be easily used to benchmark Spark, Hive and etc. BigBench will support more benchmarks in the future. BigBench will also support cloud-native systems and service monitoring system ( such as [prometheus](https://github.com/prometheus/prometheus) ) later.  
 
 ---
-## Test with Spark SQL ##
+## Build Bigbench ##
+* [Build Bigbench](docs/Bigbench-build.md)
+
+---
+## Getting Started ##
 Before your test, make sure you have deployed hadoop and spark environment, checking with commands:
 ```
 hadoop version
@@ -20,9 +27,8 @@ hadoop version
 ```
 spark-shell --version
 ```
-***spark2x with scala2.11.x please pull branch spark2x_scala211***
 
-### 1.specify slaves of your cluster
+### 1. Configure `slaves` ###
 * Copy "[slaves.template](conf/slaves.template)" to "slaves" in folder [conf](conf).
 * Specify the hostname/ip of every node, one hostname/ip per line. Such as:
 
@@ -32,10 +38,12 @@ slave2
 slabe3
 ```
 
-### 2.Initialize the environment
+### 2.Initialize the Environment ###
 * Execute [bin/InitializeEnvironment.sh](bin/InitializeEnvironment.sh)
-### 3. Start TPC-DS Benchmark
-### 1) Genenrate TPC-DS Data
+
+### 3. Prepare benchmark Data ###
+Bigbench generates benchmark data based on Spark. Making sure you have Spark environment in your cluster. And the more resources allocated to Spark, the faster data is generated. For details about Spark Tuning, see [Spark Tuning Guides](http://spark.incubator.apache.org/docs/latest/tuning.html).
+### 1) Genenrate TPC-DS Data ###
 * Specify the configuration in [bin/GenerateTpcdsData.sh](bin/GenerateTpcdsData.sh):
   
   ***datascale*** ( decides the data scale of generated data, in GB )
@@ -48,25 +56,10 @@ slabe3
 dataScale=500
 onlyInitializeMetastore=False
 ```
-
 * Execute the [bin/GenerateTpcdsData.sh](bin/GenerateTpcdsData.sh) in the master node.
-### 2) Run TPC-DS Benchmark
-* Specify the configuration in [bin/TestSparkWithTpcds.sh](bin/TestSparkWithTpcds.sh):
-  
-  ***datascale*** ( decides the data scale of TPC-DS benchmark, in GB )
-  
-  ***selectedQueries*** ( decides which queries of TPC-DS to be tested )
-```
-#!/bin/bash
 
-# configurations
-dataScale=500
-selectedQueries=q1,q2,q3
 
-```
-
-### 4. Start TPC-H Benchmark
-### 1) Genenrate TPC-H Data
+### 2) Genenrate TPC-H Data ###
 * Specify the configuration in [bin/GenerateTpchData.sh](bin/GenerateTpcdsData.sh):
 
   ***datascale*** ( decides the data scale of generated data, in GB )
@@ -80,13 +73,33 @@ dataScale=500
 onlyInitializeMetastore=False
 ```
 
-* Execute the [bin/GenerateTpchData.sh](bin/GenerateTpcdsData.sh) in the master node.
-### 2) Run TPC-H Benchmark
-* Specify the configuration in [bin/TestSparkWithTpch.sh](bin/TestSparkWithTpch.sh):
-  
-  ***datascale*** ( decides the data scale of TPC-DS benchmark， in GB )
+* Execute the [bin/GenerateTpchData.sh](bin/GenerateTpchData.sh) in the master node.
 
-  ***selectedQueries*** ( decides which queries of TPC-DS to be tested )
+### 4. Start Benchmarking ###
+Currently, Bigbench provides test scripts of Spark and Hive.
+### 1) Run TPC-DS Benchmark ###
+* Specify the configuration in [bin/TestSparkWithTpcds.sh](bin/TestSparkWithTpcds.sh) or [bin/TestHiveWithTpcds.sh](bin/TestHiveWithTpcds.sh):
+  
+  ***datascale*** ( decides the data scale of TPC-DS benchmark, in GB )
+  
+  ***selectedQueries*** ( decides which queries of TPC-DS to be tested, all queries can be found in [querySamples/tpcds](querySamples/tpcds) )
+```
+#!/bin/bash
+
+# configurations
+dataScale=500
+selectedQueries=q1,q2,q3
+
+```
+* Directly run [bin/TestSparkWithTpcds.sh](bin/TestSparkWithTpcds.sh) or [bin/TestHiveWithTpcds.sh](bin/TestHiveWithTpcds.sh):
+
+
+### 2) Run TPC-H Benchmark ###
+* Specify the configuration in [bin/TestSparkWithTpch.sh](bin/TestSparkWithTpch.sh) or [bin/TestHiveWithTpch.sh](bin/TestHiveWithTpch.sh):
+  
+  ***datascale*** ( decides the data scale of TPC-DS benchmark, in GB )
+
+  ***selectedQueries*** ( decides which queries of TPC-DS to be tested, all queries can be found in [querySamples/tpch](querySamples/tpch) )
 ```
 #!/bin/bash
 
@@ -96,14 +109,12 @@ selectedQueries=q1,q2,q3
 
 ```
 
-### 5. Results
-* BigBench saves detailed results into HDFS (/BenchmarkData/Tpcds/Results)
-* BigBench saves simplified results into [bigbench.report](/reports/bigbench.report), including:
+* Directly run [bin/TestSparkWithTpch.sh](bin/TestSparkWithTpch.sh) or [bin/TestHiveWithTpch.sh](bin/TestHiveWithTpch.sh):
+
+
+### 5. Benchmark Results ###
+* BigBench saves main results into [bigbench.report](/reports/bigbench.report), shown as:
 ```
-BenchmarkName     Queries     Durations    StartAt     StopAt    DurationSum      Datasize     FinalStatus
+Framework    BenchmarkName     Queries     Durations    StartAt     StopAt    DurationSum      Datasize     FinalStatus
 ```
 ---
-## TO DO List ##
-1. Support deployment and visualization of cluster monitering;
-2. Integrate with more benchmark (such as hibench);
-3. Support more bigdata framework;

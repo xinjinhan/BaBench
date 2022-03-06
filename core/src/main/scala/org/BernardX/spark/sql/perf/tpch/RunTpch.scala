@@ -50,7 +50,7 @@ object RunTpch {
       val results = experiment.getFinalResults()
       val times = results.map(res => res.executionTime.get.toInt).toList
       val duration = times.sum
-      reportDurationFile.write(s"TPC-H  ($queryListString)  ${times.mkString("(",",",")")}  $startTime" +
+      reportDurationFile.write(s"Spark  TPC-H  ($queryListString)  ${times.mkString("(",",",")")}  $startTime" +
         s"  $stopTime  $duration  ${scaleFactor}GB  Succeed\n")
     }
     catch {
