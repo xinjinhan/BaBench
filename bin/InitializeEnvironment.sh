@@ -11,7 +11,9 @@ if [ ! -f "$location/../conf/slaves" ];then
   exit 1
 fi
 
-# make benchmark tools
+# unzip and make benchmark tools
+unzip $location/../tools/tpcds-kit.zip -d $location/../tools/
+unzip $location/../tools/tpch-kit.zip -d $location/../tools/
 cd $location/../tools/tpcds-kit/tools/ && make
 cd $location/../tools/tpch-kit/dbgen && make
 
