@@ -1,5 +1,5 @@
 # Bigdata Benchmark suite (BigBench)
-## A scalable, easy to use OLAP benchmark suite for.
+## A scalable, easy to use OLAP benchmark suite.
 * Homepage: https://github.com/xinjinhan/BigBench.git
 * Contents:
     1. Overview 
