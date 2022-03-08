@@ -13,5 +13,5 @@ spark-submit --master yarn --num-executors 10 --executor-memory 2g --executor-co
 --class org.BernardX.spark.sql.perf.tpch.GenerateTpchData ${location}/../jars/bigbench-core-1.0.jar \
 $dataScale \
 $onlyInitializeMetastore \
-${location}/../tools/tpch-kit/dbgen \
+${location}/../tools/tpch-kit/ \
 $HOSTNAME
