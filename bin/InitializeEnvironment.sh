@@ -16,7 +16,7 @@ function makeBenchmarks() {
  tar -zxvf $location/../tools/tpcds-kit.tar.gz -C $location/../tools/
  tar -zxvf $location/../tools/tpch-kit.tar.gz -C $location/../tools/
  cd $location/../tools/tpcds-kit/tools/ && make
- cd $location/../tools/tpch-kit/dbgen && make
+ cd $location/../tools/tpch-kit/ && make
 }
 
 makeBenchmarks
