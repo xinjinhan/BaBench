@@ -39,4 +39,4 @@ else
    exit 1
 fi
 
-echo "Hive  Tpcds  ($querys)  ($durations)  $startTime  $endTime  $durationSum  $dataScale  Succeed" >> $location/../reports/bigbench.report
+echo "Hive  Tpcds  (${querys[*]})  (${durations[*]})  $startTime  $endTime  $durationSum  $dataScale  Succeed" >> $location/../reports/bigbench.report
