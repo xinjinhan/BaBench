@@ -2,21 +2,18 @@
 ## A scalable, easy to use OLAP benchmark suite.
 * Homepage: https://github.com/xinjinhan/BigBench.git
 * Contents:
-    1. Overview 
-    2. Build Bigbench
-    3. Getting Started
-       1) Configuration
-       2) Initialize the Environment
-       3) Prepare Benchmark Data
-       4) Run benchmark
+    1. Overview
+    2. Getting Started
+       1) Build Bigbench
+       2) Configuration
+       3) Initialize the Environment
+       4) Prepare Benchmark Data
+       5) Run benchmark
 ---
 ## OVERVIEW ##
 
 BigBench is a big data benchmark suite that helps evaluate different big data framework ( such as [Spark SQL](https://github.com/apache/spark), [Hive](https://github.com/apache/hive), [Impala](https://github.com/apache/impala), and etc ). By now, BigBench contains TPC-DS and TPC-H, two commonly used decision support system benchmarks. BigBench can be easily used to benchmark Spark, Hive and etc. BigBench will support more benchmarks in the future. BigBench will also support cloud-native systems and service monitoring system ( such as [prometheus](https://github.com/prometheus/prometheus) ) later.  
 
----
-## Build Bigbench ##
-* [Build Bigbench](docs/Bigbench-build.md)
 
 ---
 ## Getting Started ##
@@ -27,21 +24,41 @@ hadoop version
 ```
 spark-shell --version
 ```
+---
+### 1. Build Bigbench ###
+<!-- * [Build Bigbench](docs/Bigbench-build.md) -->
+### 1) Build through Maven ###
+To simply build all modules in HiBench, use the below command. This could be time consuming because the hadoopbench relies on 3rd party tools like Mahout and Nutch. The build process automatically downloads these tools for you. If you won't run these workloads, you can only build a specific framework to speed up the build process.
 
-### 1. Configure `slaves` ###
+    mvn clean package
+
+
+### 2) Specify Scala Version ###
+To specify the Scala version, use -Dscala=xxx(2.11 or 2.12). By default, it builds for scala 2.12.
+
+    mvn -Dscala=2.12 clean package
+
+
+### 3) Specify Spark Version ###
+To specify the spark version, use -Dspark=xxx(2.2, 2.4, 3.0, 3.1, or 3.2). By default, it builds for spark 3.1
+
+    mvn -Dspark=3.1 -Dscala=2.12 clean package
+
+
+### 2. Configure `slaves` ###
 * Copy "[slaves.template](conf/slaves.template)" to "slaves" in folder [conf](conf).
 * Specify the hostname/ip of every node, one hostname/ip per line. Such as:
 
 ```
 slave1
 slave2
-slabe3
+slave3
 ```
 
-### 2.Initialize the Environment ###
+### 3.Initialize the Environment ###
 * Execute [bin/InitializeEnvironment.sh](bin/InitializeEnvironment.sh)
 
-### 3. Prepare benchmark Data ###
+### 4. Prepare benchmark Data ###
 Bigbench generates benchmark data based on Spark. Making sure you have Spark environment in your cluster. And the more resources allocated to Spark, the faster data is generated. For details about Spark Tuning, see [Spark Tuning Guides](http://spark.incubator.apache.org/docs/latest/tuning.html).
 ### 1) Genenrate TPC-DS Data ###
 * Specify the configuration in [bin/GenerateTpcdsData.sh](bin/GenerateTpcdsData.sh):
@@ -75,7 +92,7 @@ onlyInitializeMetastore=False
 
 * Execute the [bin/GenerateTpchData.sh](bin/GenerateTpchData.sh) in the master node.
 
-### 4. Start Benchmarking ###
+### 5. Start Benchmarking ###
 Currently, Bigbench provides test scripts of Spark and Hive.
 ### 1) Run TPC-DS Benchmark ###
 * Specify the configuration in [bin/TestSparkWithTpcds.sh](bin/TestSparkWithTpcds.sh) or [bin/TestHiveWithTpcds.sh](bin/TestHiveWithTpcds.sh):
