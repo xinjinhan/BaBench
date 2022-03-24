@@ -2,12 +2,13 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-    <modelVersion>4.0.0</modelVersion>
 
+    <modelVersion>4.0.0</modelVersion>
     <groupId>org.BernardX</groupId>
-    <artifactId>parent_2.12</artifactId>
+    <artifactId>parent</artifactId>
     <version>1.0</version>
     <packaging>pom</packaging>
+    <name>bigbench</name>
 
     <developers>
         <developer>
@@ -22,82 +23,52 @@
     </modules>
 
     <properties>
-        <spark.version>3.1.3</spark.version>
+        <maven-assembly-plugin.version>2.5.3</maven-assembly-plugin.version>
+        <maven.compiler.source>8</maven.compiler.source>
+        <maven.compiler.target>8</maven.compiler.target>
+        <maven-compiler-plugin.version>3.2</maven-compiler-plugin.version>
+        <sbt.project.name>examples</sbt.project.name>
+        <build.testJarPhase>none</build.testJarPhase>
+        <build.copyDependenciesPhase>package</build.copyDependenciesPhase>
+        <hadoop.deps.scope>provided</hadoop.deps.scope>
+        <hive.deps.scope>provided</hive.deps.scope>
+        <parquet.deps.scope>provided</parquet.deps.scope>
         <java.version>1.8</java.version>
         <sparkPerf.version>0.3.2</sparkPerf.version>
         <twitter-util-jvm.version>21.2.0</twitter-util-jvm.version>
         <scopt.version>4.0.1</scopt.version>
         <yaml.version>1.29</yaml.version>
-        <scala.version>2.12.10</scala.version>
-        <scala-binary.version>2.12</scala-binary.version>
     </properties>
-
-    <dependencies>
-        <dependency>
-            <groupId>org.scalatest</groupId>
-            <artifactId>scalatest_${scala-binary.version}</artifactId>
-            <version>3.2.9</version>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-            <version>4.13.1</version>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.spark</groupId>
-            <artifactId>spark-mllib_${scala-binary.version}</artifactId>
-            <version>${spark.version}</version>
-            <scope>provided</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.spark</groupId>
-            <artifactId>spark-sql_${scala-binary.version}</artifactId>
-            <version>${spark.version}</version>
-            <scope>provided</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.spark</groupId>
-            <artifactId>spark-core_${scala-binary.version}</artifactId>
-            <version>${spark.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>com.twitter</groupId>
-            <artifactId>util-jvm_${scala-binary.version}</artifactId>
-            <version>${twitter-util-jvm.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>com.github.scopt</groupId>
-            <artifactId>scopt_${scala-binary.version}</artifactId>
-            <version>${scopt.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.yaml</groupId>
-            <artifactId>snakeyaml</artifactId>
-            <version>${yaml.version}</version>
-        </dependency>
-    </dependencies>
 
     <build>
         <plugins>
             <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
-                <configuration>
-                    <source>1.8</source>
-                    <target>1.8</target>
-                    <encoding>UTF-8</encoding>
-                </configuration>
+                <version>${maven-compiler-plugin.version}</version>
             </plugin>
         </plugins>
     </build>
 
     <profiles>
+
+        <profile>
+            <id>allModules</id>
+            <modules>
+                <module>core</module>
+            </modules>
+            <activation>
+                <property>
+                    <name>!modules</name>
+                </property>
+            </activation>
+        </profile>
+
         <profile>
             <id>defaultSpark</id>
             <properties>
-                <spark.version>3.1.3</spark.version>
-                <spark.bin.version>3.1</spark.bin.version>
+                <spark.version>2.4.5</spark.version>
+                <spark.bin.version>2.4</spark.bin.version>
             </properties>
             <activation>
                 <property>
@@ -163,10 +134,24 @@
         </profile>
 
         <profile>
+            <id>spark3.2</id>
+            <properties>
+                <spark.version>3.2.0</spark.version>
+                <spark.bin.version>3.2</spark.bin.version>
+            </properties>
+            <activation>
+                <property>
+                    <name>spark</name>
+                    <value>3.2</value>
+                </property>
+            </activation>
+        </profile>
+
+        <profile>
             <id>defaultScalaVersion</id>
             <properties>
                 <scala.version>2.12.10</scala.version>
-                <scala.binary.version>2.12</scala.binary.version>
+                <scala-binary.version>2.12</scala-binary.version>
             </properties>
             <activation>
                 <property>
@@ -179,7 +164,7 @@
             <id>scala2.11</id>
             <properties>
                 <scala.version>2.11.8</scala.version>
-                <scala.binary.version>2.11</scala.binary.version>
+                <scala-binary.version>2.11</scala-binary.version>
             </properties>
             <activation>
                 <property>
@@ -193,7 +178,7 @@
             <id>scala2.12</id>
             <properties>
                 <scala.version>2.12.10</scala.version>
-                <scala.binary.version>2.12</scala.binary.version>
+                <scala-binary.version>2.12</scala-binary.version>
             </properties>
             <activation>
                 <property>
