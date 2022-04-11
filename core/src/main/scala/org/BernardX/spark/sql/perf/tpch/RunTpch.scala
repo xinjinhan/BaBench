@@ -45,6 +45,7 @@ object RunTpch {
     try {
       val sqlContext = SparkSession
         .builder()
+        .appName(s"TPCH_${scaleFactor}GB_${queryListString}_$dataFormat")
         .enableHiveSupport()
         .getOrCreate()
         .sqlContext
