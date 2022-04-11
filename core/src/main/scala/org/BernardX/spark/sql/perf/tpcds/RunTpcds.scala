@@ -25,7 +25,7 @@ import java.util.Date
 
 object RunTpcds {
   def main(args: Array[String]): Unit = {
-    if (args.length != 4) {
+    if (args.length != 5) {
       System.err.println(
         s"Usage: $RunTpcds <DATA_FORMAT> <DATA_SCALE> <QUERY_LIST> <REPORT_LOCATION> <HADOOP_HOST>"
       )
