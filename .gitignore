@@ -7,3 +7,6 @@
 /core/bigbench-core.iml
 /jars/
 /parent.iml
+/conf
+/tools/tpcds-kit
+/tools/tpch-kit
