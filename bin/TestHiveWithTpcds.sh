@@ -1,12 +1,13 @@
 #!/bin/bash
 
 # configurations
+dataFormat=parquet
 dataScale=500
 selectedQueries=q1,q2,q3
 
 
 # submit benchmark program
-if hadoop fs -test -e /BenchmarkData/Tpcds/tpcds_${dataScale}/web_site;then
+if hadoop fs -test -e /BenchmarkData/Tpcds/tpcds_${dataScale}/tpcds_${dataFormat}/web_site;then
 
 location=$(cd "$(dirname "$0")";pwd)
 querys=(`echo $selectedQueries | tr ',' ' '`)
@@ -39,13 +40,13 @@ function timediff() {
 }
 
 function runHive() {
-  hive -i $location/../querySamples/tpcds/init.sql --database tpcds_$1_parquet -f $location/../querySamples/tpcds/$2
+  hive -i $location/../querySamples/tpcds/init.sql --database tpcds_$1_$2 -f $location/../querySamples/tpcds/$3
 }
 startTime=`date +'%Y-%m-%d_%H:%M:%S'`
 
 for i in "${!querys[@]}";do
     startSecondsQuery=$(date +%s.%N)
-    runHive $dataScale ${querys[$i]}.sql
+    runHive $dataScale $dataFormat ${querys[$i]}.sql
     if [ "$?" -ne 0 ];then
       echo "Falied: Hive ${dataScale}GB Tpcds test failed at Query ${querys[$i]}."
       exit 1
@@ -62,4 +63,4 @@ else
    exit 1
 fi
 
-echo "Hive  Tpcds  (${querys[*]})  (${durations[*]})  $startTime  $endTime  $durationSum  $dataScale  Succeed" >> $location/../reports/bigbench.report
+echo "Hive  Tpcds  (${querys[*]})  (${durations[*]})  $startTime  $endTime  $durationSum  $dataScale  $dataFormat  Succeed" >> $location/../reports/bigbench.report

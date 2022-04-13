@@ -21,20 +21,21 @@ import org.apache.spark.sql.SparkSession
 
 object GenerateTpchData {
   def main(args: Array[String]): Unit = {
-    if (args.length != 4) {
+    if (args.length != 5) {
       System.err.println(
-        s"Usage: $RunTpch <DATA_SCALE> <SKIP_DATAGENERATION> <DBGEN_DIR> <HADOOP_HOST>"
+        s"Usage: $RunTpch <DATA_FORMAT> <DATA_SCALE> <SKIP_DATAGEN_CREATE_DATABASE> <DSAGEN_DIR> <HADOOP_HOST>"
       )
       System.exit(1)
     }
     try {
-      val scaleFactor: String = args(0)
-      val skipDataGenerate: String = args(1)
-      val dbgenDir = args(2)
-      val hadoopHost = args(3)
-      val rootDir = s"hdfs://$hadoopHost:9000/BenchmarkData/Tpch/tpch_$scaleFactor"
-      val format = "parquet"
-      val databaseName = "tpch_" + scaleFactor +"_parquet"
+      val dataFormat = args(0)
+      val scaleFactor: String = args(1)
+      val skipDataGenerate: String = args(2)
+      val dbgenDir = args(3)
+      val hadoopHost = args(4)
+
+      val rootDir = s"hdfs://$hadoopHost:9000/BenchmarkData/Tpch/tpch_$scaleFactor/tpch_$dataFormat"
+      val databaseName = s"tpch_${scaleFactor}_$dataFormat"
 
       val sparkSession = SparkSession
         .builder()
@@ -51,7 +52,7 @@ object GenerateTpchData {
       if (!skipDataGenerate.toBoolean) {
         tables.genData(
           location = rootDir,
-          format = format,
+          format = dataFormat,
           overwrite = true,
           partitionTables = false,
           clusterByPartitionColumns = false,
@@ -59,11 +60,11 @@ object GenerateTpchData {
           numPartitions = 120)
       }
 
-      //创建临时表
-      tables.createTemporaryTables(rootDir, format)
-      //将表信息注册到 hive metastore
+      //Create tmp table
+      tables.createTemporaryTables(rootDir, dataFormat)
+      //Register table to hive metastore
       sqlContext.sql(s"create database $databaseName")
-      tables.createExternalTables(rootDir, format, databaseName, overwrite = true, discoverPartitions = false)
+      tables.createExternalTables(rootDir, dataFormat, databaseName, overwrite = true, discoverPartitions = false)
     } catch {
       case e: Exception =>
         e.printStackTrace()

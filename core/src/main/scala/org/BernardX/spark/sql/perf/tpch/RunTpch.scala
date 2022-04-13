@@ -25,29 +25,33 @@ import java.util.Date
 
 object RunTpch {
   def main(args: Array[String]): Unit = {
-    if (args.length != 4) {
+    if (args.length != 5) {
       System.err.println(
-        s"Usage: $RunTpch <DATA_SCALE> <QUERY_LIST> <REPORT_LOCATION> <HADOOP_HOST>"
+        s"Usage: $RunTpch <DATA_FORMAT> <DATA_SCALE> <QUERY_LIST> <REPORT_LOCATION> <HADOOP_HOST>"
       )
       System.exit(1)
     }
-      val scaleFactor: String = args(0)
-      val queryListString: String = args(1)
-      val queryNames: Array[String] = queryListString.split(",")
-      val reportLocation: String= args(2)
-      val hadoopHost: String = args(3)
-      val reportDurationFile = new FileWriter(s"${File.separator}$reportLocation${File.separator}bigbench.report",true)
-      val dateFrame: SimpleDateFormat = new SimpleDateFormat("yyyy-MM-dd_HH:mm:ss")
+
+    val dataFormat: String = args(0)
+    val scaleFactor: String = args(1)
+    val queryListString: String = args(2)
+    val queryNames: Array[String] = queryListString.split(",")
+    val reportLocation: String= args(3)
+    val hadoopHost: String = args(4)
+
+    val reportDurationFile = new FileWriter(s"${File.separator}$reportLocation${File.separator}bigbench.report",true)
+    val dateFrame: SimpleDateFormat = new SimpleDateFormat("yyyy-MM-dd_HH:mm:ss")
 
     try {
       val sqlContext = SparkSession
         .builder()
+        .appName(s"TPCH_${scaleFactor}GB_${queryListString}_$dataFormat")
         .enableHiveSupport()
         .getOrCreate()
         .sqlContext
 
       val tpch = new TPCH(sqlContext)
-      val databaseName = s"tpch_${scaleFactor}_parquet"
+      val databaseName = s"tpch_${scaleFactor}_$dataFormat"
 
       val resultLocation = s"hdfs://$hadoopHost:9000/BenchmarkData/Tpch/Results"
       val iteration = 1
@@ -68,7 +72,7 @@ object RunTpch {
       val times = results.map(res => res.executionTime.get.toInt).toList
       val duration = times.sum
       reportDurationFile.write(s"Spark  TPC-H  ($queryListString)  ${times.mkString("(",",",")")}  $startTime" +
-        s"  $stopTime  $duration  ${scaleFactor}GB  Succeed\n")
+        s"  $stopTime  $duration  ${scaleFactor}GB  $dataFormat   Succeed\n")
     }
     catch {
       case e: Exception =>
