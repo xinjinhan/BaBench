@@ -58,6 +58,7 @@ object RunTpcds {
       val queryMap = tpcds.tpcds2_4QueriesMap
       val timeout = 100000
       val queries = queryNames.map(queryName => queryMap(queryName))
+      val appId = sqlContext.sparkContext.applicationId
 
       val startTime = dateFrame.format(new Date())
       sqlContext.sql(s"use $databaseName")
@@ -66,7 +67,7 @@ object RunTpcds {
         iterations = iteration,
         resultLocation = resultLocation)
       experiment.waitForFinish(timeout)
-      val appId = sqlContext.sparkContext.applicationId
+
       val stopTime = dateFrame.format(new Date())
 
       val results = experiment.getFinalResults()

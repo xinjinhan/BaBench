@@ -58,6 +58,7 @@ object RunTpch {
       val queryMap = tpch.queriesMap
       val timeout = 100000
       val queries = queryNames.map(queryName => queryMap(queryName.replace("q", "Q")))
+      val appId = sqlContext.sparkContext.applicationId
 
       val startTime = dateFrame.format(new Date())
       sqlContext.sql(s"use $databaseName")
@@ -66,7 +67,6 @@ object RunTpch {
         iterations = iteration,
         resultLocation = resultLocation)
       experiment.waitForFinish(timeout)
-      val appId = sqlContext.sparkContext.applicationId
       val stopTime = dateFrame.format(new Date())
 
       val results = experiment.getFinalResults()
