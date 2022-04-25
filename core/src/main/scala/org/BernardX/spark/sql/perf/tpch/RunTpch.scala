@@ -66,13 +66,14 @@ object RunTpch {
         iterations = iteration,
         resultLocation = resultLocation)
       experiment.waitForFinish(timeout)
+      val appId = sqlContext.sparkContext.applicationId
       val stopTime = dateFrame.format(new Date())
 
       val results = experiment.getFinalResults()
       val times = results.map(res => res.executionTime.get.toInt).toList
       val duration = times.sum
       reportDurationFile.write(s"Spark  TPC-H  ($queryListString)  ${times.mkString("(",",",")")}  $startTime" +
-        s"  $stopTime  $duration  ${scaleFactor}GB  $dataFormat   Succeed\n")
+        s"  $stopTime  $duration  ${scaleFactor}GB  $dataFormat   $appId   Succeed\n")
     }
     catch {
       case e: Exception =>
