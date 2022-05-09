@@ -13,6 +13,8 @@ fi
 
 # make benchmark tools
 function makeBenchmarks() {
+ rm -r -f $location/../tools/tpcds-kit
+ rm -r -f $location/../tools/tpch-kit
  tar -zxvf $location/../tools/tpcds-kit.tar.gz -C $location/../tools/
  tar -zxvf $location/../tools/tpch-kit.tar.gz -C $location/../tools/
  cd $location/../tools/tpcds-kit/tools/ && make
