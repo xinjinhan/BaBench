@@ -58,6 +58,7 @@ object RunTpch {
       val queryMap = tpch.queriesMap
       val timeout = 100000
       val queries = queryNames.map(queryName => queryMap(queryName.replace("q", "Q")))
+      val appId = sqlContext.sparkContext.applicationId
 
       val startTime = dateFrame.format(new Date())
       sqlContext.sql(s"use $databaseName")
@@ -71,8 +72,8 @@ object RunTpch {
       val results = experiment.getFinalResults()
       val times = results.map(res => res.executionTime.get.toInt).toList
       val duration = times.sum
-      reportDurationFile.write(s"Spark  TPC-H  ($queryListString)  ${times.mkString("(",",",")")}  $startTime" +
-        s"  $stopTime  $duration  ${scaleFactor}GB  $dataFormat   Succeed\n")
+      reportDurationFile.write(s"Spark TPC-H ($queryListString) ${times.mkString("(",",",")")} $startTime" +
+        s" $stopTime $duration ${scaleFactor}GB $dataFormat $appId Succeed\n")
     }
     catch {
       case e: Exception =>
