@@ -1,1 +1,1 @@
-Framework BenchmarkName Queries Durations StartAt StopAt DurationSum Datasize DataFormat ApplicationId FinalStatus
+Framework,BenchmarkName,Queries,Durations,StartAt,StopAt,DurationSum,Datasize,DataFormat,ApplicationId,FinalStatus
