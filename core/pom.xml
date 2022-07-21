@@ -10,9 +10,9 @@
     </parent>
 
     <modelVersion>4.0.0</modelVersion>
-    <artifactId>bigbench-core</artifactId>
+    <artifactId>babench-core</artifactId>
     <packaging>jar</packaging>
-    <name>bigbench-core</name>
+    <name>babench-core</name>
 
     <dependencies>
         <dependency>

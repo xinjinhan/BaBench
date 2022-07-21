@@ -1,10 +1,10 @@
-# Bigdata Benchmark suite (BigBench)
+# Bigdata Benchmark suite (BaBench)
 ## A scalable, easy to use OLAP benchmark suite.
-* Homepage: https://github.com/xinjinhan/BigBench.git
+* Homepage: https://github.com/xinjinhan/BaBench.git
 * Contents:
     1. Overview
     2. Getting Started
-       1) Build Bigbench
+       1) Build Babench
        2) Configuration
        3) Initialize the Environment
        4) Prepare Benchmark Data
@@ -12,7 +12,7 @@
 ---
 ## OVERVIEW ##
 
-BigBench is a big data benchmark suite that helps evaluate different big data framework ( such as [Spark SQL](https://github.com/apache/spark), [Hive](https://github.com/apache/hive), [Impala](https://github.com/apache/impala), and etc ). By now, BigBench contains TPC-DS and TPC-H, two commonly used decision support system benchmarks. BigBench can be easily used to benchmark Spark, Hive and etc. BigBench will support more benchmarks in the future. BigBench will also support cloud-native systems and service monitoring system ( such as [prometheus](https://github.com/prometheus/prometheus) ) later.  
+babench is a big data benchmark suite that helps evaluate different big data framework ( such as [Spark SQL](https://github.com/apache/spark), [Hive](https://github.com/apache/hive), [Impala](https://github.com/apache/impala), and etc ). By now, babench contains TPC-DS and TPC-H, two commonly used decision support system benchmarks. babench can be easily used to benchmark Spark, Hive and etc. babench will support more benchmarks in the future. babench will also support cloud-native systems and service monitoring system ( such as [prometheus](https://github.com/prometheus/prometheus) ) later.  
 
 
 ---
@@ -25,8 +25,8 @@ hadoop version
 spark-shell --version
 ```
 ---
-### 1. Build Bigbench ###
-* [Build Bigbench](docs/Bigbench-build.md)
+### 1. Build babench ###
+* [Build babench](docs/babench-build.md)
 
 
 ### 2. Configure `slaves` ###
@@ -43,7 +43,7 @@ slave3
 * Execute [bin/InitializeEnvironment.sh](bin/InitializeEnvironment.sh)
 
 ### 4. Prepare benchmark Data ###
-Bigbench generates benchmark data based on Spark. Making sure you have Spark environment in your cluster. And the more resources allocated to Spark, the faster data is generated. For details about Spark Tuning, see [Spark Tuning Guides](http://spark.incubator.apache.org/docs/latest/tuning.html).
+babench generates benchmark data based on Spark. Making sure you have Spark environment in your cluster. And the more resources allocated to Spark, the faster data is generated. For details about Spark Tuning, see [Spark Tuning Guides](http://spark.incubator.apache.org/docs/latest/tuning.html).
 ### 1) Genenrate TPC-DS Data ###
 * Specify the configuration in [bin/GenerateTpcdsData.sh](bin/GenerateTpcdsData.sh):
   
@@ -77,7 +77,7 @@ onlyInitializeMetastore=False
 * Execute the [bin/GenerateTpchData.sh](bin/GenerateTpchData.sh) in the master node.
 
 ### 5. Start Benchmarking ###
-Currently, Bigbench provides test scripts of Spark and Hive.
+Currently, babench provides test scripts of Spark and Hive.
 ### 1) Run TPC-DS Benchmark ###
 * Specify the configuration in [bin/TestSparkWithTpcds.sh](bin/TestSparkWithTpcds.sh) or [bin/TestHiveWithTpcds.sh](bin/TestHiveWithTpcds.sh):
   
@@ -114,7 +114,7 @@ selectedQueries=q1,q2,q3
 
 
 ### 5. Benchmark Results ###
-* BigBench saves main results into [bigbench.report](/reports/bigbench.report), shown as:
+* babench saves main results into [babench.report](/reports/babench.report), shown as:
 ```
 Framework    BenchmarkName     Queries     Durations    StartAt     StopAt    DurationSum      Datasize     FinalStatus
 ```

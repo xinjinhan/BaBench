@@ -39,7 +39,7 @@ object RunTpcds {
     val reportLocation: String= args(3)
     val hadoopHost: String = args(4)
 
-    val reportDurationFile = new FileWriter(s"${File.separator}$reportLocation${File.separator}bigbench.report",true)
+    val reportDurationFile = new FileWriter(s"${File.separator}$reportLocation${File.separator}babench.report",true)
     val dateFrame: SimpleDateFormat = new SimpleDateFormat("yyyy-MM-dd_HH:mm:ss")
 
     try {
@@ -73,8 +73,8 @@ object RunTpcds {
       val results = experiment.getFinalResults()
       val times = results.map(res => res.executionTime.get.toInt).toList
       val duration = times.sum
-      reportDurationFile.write(s"Spark TPC-DS ($queryListString) ${times.mkString("(",",",")")} $startTime" +
-        s" $stopTime $duration ${scaleFactor}GB $dataFormat $appId Succeed\n")
+      reportDurationFile.write(s"Spark,TPC-DS,($queryListString),${times.mkString("(",",",")")},$startTime," +
+        s",$stopTime,$duration,${scaleFactor}GB,$dataFormat,$appId,Succeed\n")
     }
     catch {
       case e: Exception =>

@@ -63,4 +63,4 @@ else
    exit 1
 fi
 
-echo "Hive  Tpch  (${querys[*]})  (${durations[*]})  $startTime  $endTime  $durationSum  $dataScale  $dataFormat  Succeed" >> $location/../reports/bigbench.report
+echo "Hive  Tpch  (${querys[*]})  (${durations[*]})  $startTime  $endTime  $durationSum  $dataScale  $dataFormat  Succeed" >> $location/../reports/babench.report
