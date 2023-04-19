@@ -26,7 +26,7 @@ spark-shell --version
 ```
 ---
 ### 1. Build babench ###
-* [Build babench](docs/babench-build.md)
+* [Build babench](docs/Babench-build.md)
 
 
 ### 2. Configure `slaves` ###
